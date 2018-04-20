@@ -13,5 +13,7 @@ module.exports = function(app,urlencodedParser){
    app.post('/edit',urlencodedParser,user.edit);
    app.get('/edit/:id',user.edit);
    app.get('/delete/:id',user.delete);
+   app.get('/login',user.login);
+   app.post('/login',urlencodedParser,user.login);
    
 }
