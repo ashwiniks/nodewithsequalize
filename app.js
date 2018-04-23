@@ -2,16 +2,25 @@ var express = require('express');
 var http = require('http');
 var path = require('path');
 var ejs  = require('ejs');
-var app = express();
 var bodyParser = require('body-parser');
+var session = require('express-session');
+var app = express();
+app.use(session({
+  secret: "cookie_secret",
+  resave: true,
+  saveUninitialized: true
+}));
+app.use(bodyParser.urlencoded({ extended: false }));
+
 // create application/x-www-form-urlencoded parser
-var urlencodedParser = bodyParser.urlencoded({ extended: false });
+// var urlencodedParser = bodyParser.urlencoded({ extended: false });
  // send app to router
-require('./router')(app,urlencodedParser);
+require('./router')(app);
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 //app.use(express.favicon());
- 
+
+
 app.use(express.static(path.join(__dirname, 'static')));
  
 
